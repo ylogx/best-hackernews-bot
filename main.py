@@ -10,6 +10,7 @@ from apis.hn import topstories, item_async
 from database import StoryPost
 
 app = Flask(__name__)
+SCORE_THRESHOLD = 500
 
 
 @app.route('/s/<short_id>')
@@ -45,7 +46,7 @@ def task(stories):
     try:
       result = rpc.get_result()
       story = json.loads(result.content)
-      if story and story.get('score') >= 100:
+      if story and story.get('score') >= SCORE_THRESHOLD:
         StoryPost.add(story)
       elif story:
         logging.info('STOP: {id} has low score ({score})'.format(**story))

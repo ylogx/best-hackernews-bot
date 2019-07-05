@@ -13,6 +13,7 @@ from apis.telegram import send_message
 
 TWO_HOURS = datetime.timedelta(hours=2)
 TWO_DAYS = datetime.timedelta(days=2)
+CHANNEL_NAME = '@best_hacker_news'
 
 class StoryPost(ndb.Model):
   title = ndb.StringProperty()
@@ -109,10 +110,10 @@ class StoryPost(ndb.Model):
 
     # Send to the telegram channel
     if development():
-      result = send_message('@hacker_news_feed_st', message,
+      result = send_message('@hacker_news_500', message,
                             {'inline_keyboard': [buttons]})
     else:
-      result = send_message('@hacker_news_feed', message,
+      result = send_message(CHANNEL_NAME, message,
                             {'inline_keyboard': [buttons]})
 
     logging.info('Telegram response: {}'.format(result))
