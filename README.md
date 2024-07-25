@@ -1,5 +1,5 @@
-# hackernewsbot
-Telegram bot that posts new hot stories from Hacker News to [telegram channel](https://telegram.me/hacker_news_feed)
+# Best Hacker News Bot
+Telegram bot that posts best stories from Hacker News to [telegram channel](https://telegram.me/best_hacker_news)
 
 ## Backend
 Bot runs on [Google App Engine](https://cloud.google.com/appengine/)
@@ -7,15 +7,15 @@ Bot runs on [Google App Engine](https://cloud.google.com/appengine/)
 ## Hacker News API
 Bot uses [Hacker News API](https://github.com/HackerNews/API)
 
-It loads [top stories](https://hacker-news.firebaseio.com/v0/topstories.json) every 10 minutes and posts any story that reached *100+* score([adjusted for inflation](https://instruments.digital/inflation-adjusted-hn/))
+It loads [top stories](https://hacker-news.firebaseio.com/v0/topstories.json) every 10 minutes and posts any story that reached *500+* score([adjusted for inflation](https://instruments.digital/inflation-adjusted-hn/))
 
 ## Telegram API
-Bot uses [Telegram Bot API](https://core.telegram.org/bots/api) to post messages to the [telegram channel](https://telegram.me/hacker_news_feed) with [sendMessage](https://core.telegram.org/bots/api#sendmessage) request
+Bot uses [Telegram Bot API](https://core.telegram.org/bots/api) to post messages to the [telegram channel](https://telegram.me/best_hacker_news) with [sendMessage](https://core.telegram.org/bots/api#sendmessage) request
 
 ## URL shortening
 Bot used [bit.ly](https://dev.bitly.com/) and [goo.gl](https://developers.google.com/url-shortener/v1/getting_started) for url shortening, but now it uses internal shortener
 
-## How to run your own `hackernewsbot`
+## How to run your own `best_hacker_news` bot
 - Clone this project
 - Run `pip install -r requirements.txt -t lib/` to install dependencies
 - Download and install [Google Cloud SDK](https://cloud.google.com/appengine/docs/standard/python/download)
@@ -37,5 +37,6 @@ dev_appserver.py .
 
 
 ## See also
+- [hackernewsbot](https://github.com/phil-r/hackernewsbot)
 - [designernewsbot](https://github.com/phil-r/designernewsbot)
 - [asciifacesbot](https://github.com/phil-r/asciifacesbot)
