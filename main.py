@@ -10,8 +10,8 @@ from apis.hn import topstories, item_async
 from database import StoryPost
 
 app = Flask(__name__)
-SCORE_THRESHOLD = 500
 
+SCORE_TARGET = 500 # based on score inflation (see https://instruments.digital/inflation-adjusted-hn/)
 
 @app.route('/s/<short_id>')
 def story_redirect(short_id):
@@ -46,12 +46,15 @@ def task(stories):
     try:
       result = rpc.get_result()
       story = json.loads(result.content)
-      if story and story.get('score') >= SCORE_THRESHOLD:
+      if story and story.get('score') >= SCORE_TARGET:
         StoryPost.add(story)
-      elif story:
+      elif story and story.get('score'):
+        # api returned a comment once (issue with id 21447853)
         logging.info('STOP: {id} has low score ({score})'.format(**story))
+      elif story:
+        logging.info('STOP: {id} has no score'.format(**story))
       else:
-        logging.info('STOP: story was probably deleted/flagged')
+        logging.info("STOP: story was probably deleted/flagged")
     except urlfetch.DownloadError as ex:
       logging.exception(ex)
     except ValueError as ex:
